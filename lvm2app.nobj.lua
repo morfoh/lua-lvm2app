@@ -10,7 +10,7 @@ luajit_ffi = false,
 -- load LVM2APP shared library.
 ffi_load"lvm2app",
 
-include "lvm2app.h",
+sys_include "lvm2app.h",
 
 subfiles {
 "src/LVM.nobj.lua",
