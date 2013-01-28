@@ -27,6 +27,12 @@ object "PV" {
 	c_source [[
 typedef pv_t PV;
 ]],
+	constructor "create" {
+		c_call "PV" "lvm_pv_create" {
+		"LVM", "lvm_handle",
+		"const char *", "pvname",
+		},
+	},
 	constructor "from_name" {
 		c_call "PV" "lvm_pv_from_name" {
 			"VG", "vg",
