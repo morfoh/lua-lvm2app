@@ -50,9 +50,28 @@ typedef lvm_t LVM;
 		c_method_call "int" "lvm_scan" {},
 	},
 
+	--- List Volume Group names
 	--
-	-- TODO: struct dm_list *lvm_list_vg_names(lvm_t libh);
-	--
+	-- Returns a table with entries containing Volume Group name strings of
+	-- the Volume Groups known to the system.
+	method "list_vg_names" {
+		var_out { "<any>", "table" },
+		c_source [[
+  struct dm_list *vgnames;
+  struct lvm_str_list *strl;
+  int i = 1;
+
+  vgnames = lvm_list_vg_names(${this});
+
+  lua_newtable(L);
+  dm_list_iterate_items(strl, vgnames) {
+	lua_pushnumber(L, i);
+	lua_pushstring(L, strl->str);
+	lua_settable(L, -3);
+	i++;
+  }
+]],
+	},
 
 	--
 	-- TODO: struct dm_list *lvm_list_vg_uuids(lvm_t libh);
