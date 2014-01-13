@@ -31,6 +31,7 @@ typedef pv_t PV;
 		c_call "PV" "lvm_pv_create" {
 		"LVM", "lvm_handle",
 		"const char *", "pvname",
+		"uint64_t", "size"
 		},
 	},
 	constructor "from_name" {
