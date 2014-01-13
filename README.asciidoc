@@ -12,6 +12,7 @@ Build Dependencies
 ------------------
 
 - cmake
+- pkgconfig
 - liblvm2app shipped with http://sourceware.org/lvm2/[LVM2]
 
 [WARNING]
@@ -22,8 +23,13 @@ dangerous for your host environment if you already rely on lvm2.
 To enable the build and installation of `liblvm2app` you need to configure the
 sources with `--enable-applib`.
 
+Besides that the detection of `liblvm2app` depends on `pkg-config` so
+lvm2 sources also need to be configured with `--enable-pkgconfig` to
+get `.pc` files installed.
+
+.Example for configuring lvm2 sources
 -----------------------------------------------------------------------------
-./configure --enable-applib
+./configure --enable-applib --enable-pkgconfig
 -----------------------------------------------------------------------------
 
 Installing
