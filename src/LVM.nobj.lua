@@ -53,6 +53,34 @@ typedef lv_t LV;
 		c_method_call "int" "lvm_scan" {},
 	},
 
+	--- Create a Volume Group with default parameters
+	--
+	-- This method creates a Volume Group object in memory.
+	-- Upon success, other methods may be used to set non-default
+	-- parameters.
+	--
+	-- Returns a VG object handle on success or nil on failure
+	--
+	-- Example workflow:
+	-- - use the appropriate methods to set non-default parameters for
+	--   the Volume Group
+	-- - use VG:extend() for each physical storage devices you want to
+	--   add to the Volume Group
+	-- - use VG:write() to commit the new Volume Group to disk
+	-- - use VG:close() to release the VG object handle
+	method "vg_create" {
+		var_in { "const char *", "vgname" },
+		var_out { "VG", "vgobj" },
+		c_source [[
+  ${vgobj} = lvm_vg_create(${this}, ${vgname});
+  if (${vgobj}) {
+	obj_type_VG_push(L, ${vgobj});
+  } else {
+	lua_pushnil(L);
+  }
+]],
+	},
+
 	--- Open a Volume Group
 	--
 	-- Returns a Volume Group object
