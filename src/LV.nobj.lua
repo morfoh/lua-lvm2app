@@ -24,9 +24,7 @@
 
 object "LV" {
 	userdata_type = 'simple',
-	c_source [[
-typedef lv_t LV;
-]],
+
 	constructor "create_linear" {
 		c_call "LV" "lvm_vg_create_lv_linear" {
 			"VG", "vg",

@@ -26,6 +26,9 @@ object "LVM" {
 	userdata_type = 'simple',
 	c_source [[
 typedef lvm_t LVM;
+typedef pv_t PV;
+typedef vg_t VG;
+typedef lv_t LV;
 ]],
 	constructor "init" {
 		var_in { "const char *", "system_dir", is_optional = true, default = NULL },

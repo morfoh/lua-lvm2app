@@ -24,9 +24,7 @@
 
 object "PV" {
 	userdata_type = 'simple',
-	c_source [[
-typedef pv_t PV;
-]],
+
 	constructor "create" {
 		c_call "PV" "lvm_pv_create" {
 		"LVM", "lvm_handle",

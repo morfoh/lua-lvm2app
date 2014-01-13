@@ -24,9 +24,7 @@
 
 object "VG" {
 	userdata_type = 'simple',
-	c_source [[
-typedef vg_t VG;
-]],
+
 	constructor "open" {
 		c_call "VG" "lvm_vg_open" {
 			"LVM", "lvm_handle",
