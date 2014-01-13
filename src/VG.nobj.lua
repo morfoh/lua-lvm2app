@@ -35,10 +35,29 @@ object "VG" {
 		c_method_call "int" "lvm_vg_close" {},
 	},
 
+	--- List Logical Volumes for a given Volume Group
 	--
-	-- TODO: struct dm_list *lvm_vg_list_lvs(vg_t vg);
-	--
+	-- Return a table of LV objects for a given VG object.
+	method "list_lvs" {
+		var_out { "<any>", "table" },
+		c_source [[
+  struct dm_list *list;
+  struct lvm_lv_list *lvl;
+  int i = 1;
 
+  lua_newtable(L);
+  list = lvm_vg_list_lvs(${this});
+
+  if (list) {
+	dm_list_iterate_items(lvl, list) {
+		lua_pushnumber(L, i);
+		obj_type_LV_push(L, lvl->lv);
+		lua_settable(L, -3);
+		i++;
+	}
+  }
+]],
+	},
 	--
 	-- TODO: struct dm_list *lvm_vg_list_pvs(vg_t vg);
 	--
