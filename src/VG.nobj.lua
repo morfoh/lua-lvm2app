@@ -25,14 +25,6 @@
 object "VG" {
 	userdata_type = 'simple',
 
-	constructor "open" {
-		c_call "VG" "lvm_vg_open" {
-			"LVM", "lvm_handle",
-			"const char *", "vgname",
-			"const char *", "mode",
-			"uint32_t", "flags"
-		},
-	},
 	constructor "create" {
 		c_call "VG" "lvm_vg_create" {
 			"LVM", "lvm_handle",

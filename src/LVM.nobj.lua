@@ -53,6 +53,17 @@ typedef lv_t LV;
 		c_method_call "int" "lvm_scan" {},
 	},
 
+	--- Open a Volume Group
+	--
+	-- Returns a Volume Group object
+	method "vg_open" {
+		c_method_call "VG" "lvm_vg_open" {
+			"const char *", "vgname",
+			"const char *", "mode",
+			"uint32_t", "flags"
+		},
+	},
+
 	--- List Volume Group names
 	--
 	-- Returns a table with entries containing Volume Group name strings of
