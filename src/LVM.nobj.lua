@@ -73,9 +73,28 @@ typedef lvm_t LVM;
 ]],
 	},
 
+	--- List Volume Group UUIDs
 	--
-	-- TODO: struct dm_list *lvm_list_vg_uuids(lvm_t libh);
-	--
+	-- Returns a table with entries containing Volume Group UUID strings of
+	-- the Volume Groups known to the system.
+	method "list_vg_uuids" {
+		var_out { "<any>", "table" },
+		c_source [[
+  struct dm_list *vguuids;
+  struct lvm_str_list *strl;
+  int i = 1;
+
+  vguuids = lvm_list_vg_uuids(${this});
+
+  lua_newtable(L);
+  dm_list_iterate_items(strl, vguuids) {
+	lua_pushnumber(L, i);
+	lua_pushstring(L, strl->str);
+	lua_settable(L, -3);
+	i++;
+  }
+]],
+	},
 
 	method "vgname_from_pvid" {
 		c_method_call "const char *" "lvm_vgname_from_pvid" { "const char *", "pvid" },
