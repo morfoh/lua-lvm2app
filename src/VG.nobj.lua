@@ -25,12 +25,6 @@
 object "VG" {
 	userdata_type = 'simple',
 
-	constructor "create" {
-		c_call "VG" "lvm_vg_create" {
-			"LVM", "lvm_handle",
-			"const char *", "vgname",
-		},
-	},
 	destructor "close" {
 		c_method_call "int" "lvm_vg_close" {},
 	},
