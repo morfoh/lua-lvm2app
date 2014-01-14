@@ -25,13 +25,6 @@
 object "PV" {
 	userdata_type = 'simple',
 
-	constructor "create" {
-		c_call "PV" "lvm_pv_create" {
-		"LVM", "lvm_handle",
-		"const char *", "pvname",
-		"uint64_t", "size"
-		},
-	},
 	constructor "from_name" {
 		c_call "PV" "lvm_pv_from_name" {
 			"VG", "vg",
