@@ -135,7 +135,7 @@ typedef lv_t LV;
 	--
 	-- Returns a table with entries containing Volume Group name strings of
 	-- the Volume Groups known to the system.
-	method "list_vg_names" {
+	method "vg_names" {
 		var_out { "<any>", "table" },
 		c_source [[
   struct dm_list *vgnames;
@@ -158,7 +158,7 @@ typedef lv_t LV;
 	--
 	-- Returns a table with entries containing Volume Group UUID strings of
 	-- the Volume Groups known to the system.
-	method "list_vg_uuids" {
+	method "vg_uuids" {
 		var_out { "<any>", "table" },
 		c_source [[
   struct dm_list *vguuids;
