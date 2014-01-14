@@ -73,6 +73,25 @@ typedef lv_t LV;
 ]],
 	},
 
+	--- Remove physical volume labels from a device
+	--
+	-- Returns a boolean which is true on success and false if the
+	-- action failed. Second value is an error message string in
+	-- the case of a failure or nil on success.
+	method "pv_remove" {
+		var_in { "const char *", "pv_name" },
+		var_out { "bool", "success" },
+		var_out { "const char *", "errmsg" },
+		c_source [[
+  if (!lvm_pv_remove(${this}, ${pv_name})) {
+	${success} = 1;
+  } else {
+	${success} = 0;
+	${errmsg} = lvm_errmsg(${this});
+  }
+]],
+	},
+
 	--- Create a Volume Group with default parameters
 	--
 	-- This method creates a Volume Group object in memory.
