@@ -1,10 +1,11 @@
 --
--- Example: pvcreate [[PhysicalVolume] [PhysicalVolume]]
+-- Example: pvcreate.lua [[PhysicalVolume] [PhysicalVolume]]
 --
 
 -- load common helper functions module
 require("cmdcommon")
 
+-- load lvm2app module
 local lvm2app = require("lvm2app")
 
 -- check if there is at least one argument or exit with
@@ -25,6 +26,8 @@ for _, device in ipairs(arg) do
 	if not success then
 		-- just continue with the next device but change error state
 		error = true
+		-- print the error message returned by LVM:pv_create() in its
+		-- second return value on error
 		status(errmsg)
 	else
 		status("Physical volume" .. " \"" .. device .. "\" " .. "successfully created")
